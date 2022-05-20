@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "helloWorld";
+
+service HelloService {
+  rpc SayHello (HelloRequest) returns (HelloResponse); // Unary
+  
+  rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse); // Server Stream
+  
+  rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse); // Client Stream
+  
+  rpc BidiHello(stream HelloRequest) returns (stream HelloResponse); // Bi directional Stream
+}
+
+message HelloRequest {
+  string name = 1;
+  int32 howMany = 2; 
+}
+
+message HelloResponse {
+  string reply = 1;
+  int32 howMany = 2;
+}
